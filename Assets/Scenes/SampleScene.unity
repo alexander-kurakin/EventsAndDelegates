@@ -782,12 +782,6 @@ MonoBehaviour:
   _walletMaxValue: 9999
   _walletStartingValue: 0
   _walletView: {fileID: 1791793639}
-  _meatSprite: {fileID: 21300000, guid: 3de96fb95248855428679c246f474f59, type: 3}
-  _moneySprite: {fileID: 21300000, guid: 0d93693b79a040f45afb3225a1f0b8a6, type: 3}
-  _alcoholSprite: {fileID: 21300000, guid: f74228f6804c06a4c88823bf85a2c7c1, type: 3}
-  _UIrowPrefab: {fileID: 5641167987537623207, guid: 4be458cbcccfdfa4eb2f7d3f5bdb5a04,
-    type: 3}
-  _UIObjectsParent: {fileID: 1123208608}
 --- !u!1 &1791793638
 GameObject:
   m_ObjectHideFlags: 0
@@ -817,6 +811,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bb217f1666c1640ab28884ae653b6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _meatSprite: {fileID: 21300000, guid: cfc0887212c983e4581f972f6b307c0f, type: 3}
+  _moneySprite: {fileID: 21300000, guid: 0d93693b79a040f45afb3225a1f0b8a6, type: 3}
+  _alcoholSprite: {fileID: 21300000, guid: f74228f6804c06a4c88823bf85a2c7c1, type: 3}
+  _UIrowPrefab: {fileID: 5641167987537623207, guid: 4be458cbcccfdfa4eb2f7d3f5bdb5a04,
+    type: 3}
+  _UIObjectsParent: {fileID: 1123208608}
 --- !u!4 &1791793640
 Transform:
   m_ObjectHideFlags: 0

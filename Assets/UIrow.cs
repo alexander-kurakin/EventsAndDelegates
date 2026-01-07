@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIrowChanger : MonoBehaviour
+public class UIrow : MonoBehaviour
 {
     private Wallet _wallet;
     private CurrencyType _currencyType;
