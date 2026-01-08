@@ -76,9 +76,4 @@ public class Wallet
         _currencyData[type] -= value;
         Changed?.Invoke(type, _currencyData[type]);
     }
-
-    public int GetBalance(CurrencyType type)
-    { 
-        return _currencyData[type];
-    }
 }

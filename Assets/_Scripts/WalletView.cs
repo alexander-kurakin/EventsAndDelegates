@@ -24,15 +24,13 @@ public class WalletView : MonoBehaviour
     [SerializeField] private UIrow _UIrowPrefab;
     [SerializeField] private Transform _UIObjectsParent;
 
-    private void Start()
-    {
-        SpawnUI();
-    }
     public void InitWallet(Wallet wallet, Dictionary<CurrencyType, int> configuredCurrency, int walletStartingValue)
     {
         _wallet = wallet;
         _configuredCurrency = new Dictionary<CurrencyType, int>(configuredCurrency);
         _walletStartingValue = walletStartingValue;
+
+        SpawnUI();
     }
 
 
