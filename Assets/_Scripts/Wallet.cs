@@ -17,6 +17,7 @@ public class Wallet
         }
 
         MaxValue = maxValue;
+
         _currencyData = new Dictionary<CurrencyType, int>();
     }
 
@@ -28,16 +29,51 @@ public class Wallet
     }
 
     public bool IsEnoughCapacity(CurrencyType type, int value) => _currencyData[type] + value <= MaxValue;
+    public bool IsWalletEmpty(CurrencyType type, int value) => _currencyData[type] - value <= 0;
 
     public void Add(CurrencyType type, int value) 
     {
-        if (value < 0 || IsEnoughCapacity(type,value) == false)
+        if (value < 0)
         {
             Debug.LogError(nameof(value));
             return;
         }
 
+        if (IsEnoughCapacity(type, value) == false)
+        {
+            if (_currencyData[type] != MaxValue)
+            {
+                _currencyData[type] = MaxValue;
+                Changed?.Invoke(type, _currencyData[type]);
+            }
+
+            return;
+        }
+
         _currencyData[type] += value;
+        Changed?.Invoke(type, _currencyData[type]);
+    }
+
+    public void Remove(CurrencyType type, int value)
+    {
+        if (value < 0)
+        {
+            Debug.LogError(nameof(value));
+            return;
+        }
+
+        if (IsWalletEmpty(type, value) ) 
+        {
+            if (_currencyData[type] != 0)
+            {
+                _currencyData[type] = 0;
+                Changed?.Invoke(type, _currencyData[type]);
+            }
+
+            return;
+        }
+
+        _currencyData[type] -= value;
         Changed?.Invoke(type, _currencyData[type]);
     }
 
@@ -46,5 +82,3 @@ public class Wallet
         return _currencyData[type];
     }
 }
-
-
