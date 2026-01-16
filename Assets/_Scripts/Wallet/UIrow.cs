@@ -1,19 +1,20 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UIrow : MonoBehaviour
 {
-    private const string AddButtonType = "Add";
-    private const string RemoveButtonType = "Remove";
+    private int _currencyIncrement;
+    private int _currencyDecrement;
 
     private Wallet _wallet;
     private CurrencyType _currencyType;
 
     [SerializeField] private Image _iconImage;
     [SerializeField] private TMP_Text _currencyText;
-    [SerializeField] private CurrencyButton _currencyAddButton;
-    [SerializeField] private CurrencyButton _currencyRemoveButton;
+    [SerializeField] private Button _addButton;
+    [SerializeField] private Button _removeButton;
 
     public void InitRow(Sprite spriteToSet, int valueToSet, Wallet wallet, CurrencyType currencyType, int currencyIncrement, int currencyDecrement)
     {
@@ -23,15 +24,30 @@ public class UIrow : MonoBehaviour
         _currencyType = currencyType;
         _wallet = wallet;
 
+        _currencyIncrement = currencyIncrement;
+        _currencyDecrement = currencyDecrement;
+
         _wallet.Changed += OnChanged;
 
-        _currencyAddButton.SetButton(_currencyType, currencyIncrement, currencyDecrement, wallet, AddButtonType);
-        _currencyRemoveButton.SetButton(_currencyType, currencyIncrement, currencyDecrement, wallet, RemoveButtonType);
+        _addButton.onClick.AddListener(OnAddClick);
+        _removeButton.onClick.AddListener(OnRemoveClick);
+    }
+
+    private void OnRemoveClick()
+    {
+        _wallet.Remove(_currencyType, _currencyDecrement);
+    }
+
+    private void OnAddClick()
+    {
+        _wallet.Add(_currencyType, _currencyIncrement);
     }
 
     private void OnDestroy()
     {
         _wallet.Changed -= OnChanged;
+        _addButton.onClick.AddListener(OnAddClick);
+        _removeButton.onClick.AddListener(OnRemoveClick);
     }
 
     private void OnChanged(CurrencyType currencyTypeOnChanged, int valueToSet)

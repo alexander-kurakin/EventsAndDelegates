@@ -33,7 +33,6 @@ public class WalletView : MonoBehaviour
         SpawnUI();
     }
 
-
     private void SpawnUI()
     {
         foreach (KeyValuePair<CurrencyType, int> currencyData in _configuredCurrency)
