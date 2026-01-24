@@ -8,7 +8,7 @@ public class Wallet
 
     private Dictionary<CurrencyType, int> _currencyData;
 
-    public Wallet(int maxValue)
+    public Wallet(int maxValue, Dictionary<CurrencyType, int> currencyData)
     {
         if (maxValue < 0)
         {
@@ -18,15 +18,10 @@ public class Wallet
 
         MaxValue = maxValue;
 
-        _currencyData = new Dictionary<CurrencyType, int>();
+        _currencyData = new Dictionary<CurrencyType, int>(currencyData);
     }
 
     public int MaxValue { get; private set; }
-
-    public void Init(Dictionary<CurrencyType, int> currencyData)
-    { 
-        _currencyData = new Dictionary<CurrencyType, int>(currencyData);        
-    }
 
     public bool IsEnoughCapacity(CurrencyType type, int value) => _currencyData[type] + value <= MaxValue;
     public bool IsWalletEmpty(CurrencyType type, int value) => _currencyData[type] - value <= 0;

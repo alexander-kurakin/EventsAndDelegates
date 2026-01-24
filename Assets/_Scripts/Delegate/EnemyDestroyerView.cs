@@ -10,7 +10,6 @@ public class EnemyDestroyerView : MonoBehaviour
     [SerializeField] private Toggle _registerIsDeadEnemy;
     [SerializeField] private Toggle _registerTimeoutEnemy;
     [SerializeField] private Toggle _registerTooMuchEnemies;
-
     [SerializeField] private Button _registerEnemyButton;
     [SerializeField] private Button _killRandomEnemyButton;
     [SerializeField] private TMP_Text _infoText;

@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class DelegateExample : MonoBehaviour
 {
     [SerializeField] EnemyDestroyerView _enemyDestroyerView;
-
     [SerializeField] private float _maxEnemyLifetime = 10f;
     [SerializeField] private int _maxEnemiesAllowed = 10;
 

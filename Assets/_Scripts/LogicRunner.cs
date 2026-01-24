@@ -24,9 +24,7 @@ public class LogicRunner : MonoBehaviour
             {CurrencyType.Alcohol, _walletStartingValue },
         };
 
-        _wallet = new Wallet(_walletMaxValue);
-        _wallet.Init(_configuredCurrency);
-
+        _wallet = new Wallet(_walletMaxValue, _configuredCurrency);
         _walletView.InitWallet(_wallet, _configuredCurrency, _walletStartingValue);
 
         _timer = new Timer(this, _defaultTimerValue);

@@ -143,9 +143,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7734939346180384963}
-  - component: {fileID: 3578326578836842006}
+  - component: {fileID: 4221083863720796472}
+  - component: {fileID: 4796206281560105733}
   m_Layer: 5
-  m_Name: UI_row
+  m_Name: WalletRow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -174,7 +175,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &3578326578836842006
+--- !u!114 &4221083863720796472
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -183,13 +184,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 1347855119826889942}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adfd057f98271487eb9c7b6d40be87c3, type: 3}
+  m_Script: {fileID: 11500000, guid: 74acca1628bac4f2e9b66b1af2155ed5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _addButton: {fileID: 1851818657194224870}
+  _removeButton: {fileID: 4859808724883705544}
+--- !u!114 &4796206281560105733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1347855119826889942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e3fc5c7e6fc04b968144869273c6555, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _iconImage: {fileID: 1419908649122465280}
   _currencyText: {fileID: 1591204026087772026}
-  _addButton: {fileID: 1851818657194224870}
-  _removeButton: {fileID: 4859808724883705544}
 --- !u!1 &3322782344507810406
 GameObject:
   m_ObjectHideFlags: 0

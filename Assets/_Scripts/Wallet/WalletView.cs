@@ -3,29 +3,23 @@ using UnityEngine;
 
 public class WalletView : MonoBehaviour
 {
-    private int _walletStartingValue;
+    [SerializeField] private List<CurrencyConfigEntry> _currencyConfigs;
+    [SerializeField] private WalletRowView _walletRowViewPrefab;
+    [SerializeField] private Transform _UIObjectsParent;
 
     private Wallet _wallet;
-    private UIrow _UIrow;
     private Dictionary<CurrencyType, int> _configuredCurrency;
+    private Dictionary<CurrencyType, CurrencyConfig> _currencyConfigsByType;
 
-    [SerializeField] private Sprite _meatSprite;
-    [SerializeField] private int _meatIncrement = 10;
-    [SerializeField] private int _meatDecrement = 25;
-
-    [SerializeField] private Sprite _moneySprite;
-    [SerializeField] private int _moneyIncrement = 50;
-    [SerializeField] private int _moneyDecrement = 75;
-
-    [SerializeField] private Sprite _alcoholSprite;
-    [SerializeField] private int _alcoholIncrement = 100;
-    [SerializeField] private int _alcoholDecrement = 125;
-
-    [SerializeField] private UIrow _UIrowPrefab;
-    [SerializeField] private Transform _UIObjectsParent;
+    private int _walletStartingValue;
 
     public void InitWallet(Wallet wallet, Dictionary<CurrencyType, int> configuredCurrency, int walletStartingValue)
     {
+        _currencyConfigsByType = new Dictionary<CurrencyType, CurrencyConfig>();
+
+        foreach (CurrencyConfigEntry currencyConfigEntry in _currencyConfigs)
+            _currencyConfigsByType[currencyConfigEntry.type] = currencyConfigEntry.config;
+
         _wallet = wallet;
         _configuredCurrency = new Dictionary<CurrencyType, int>(configuredCurrency);
         _walletStartingValue = walletStartingValue;
@@ -37,37 +31,23 @@ public class WalletView : MonoBehaviour
     {
         foreach (KeyValuePair<CurrencyType, int> currencyData in _configuredCurrency)
         {
-            _UIrow = Instantiate(_UIrowPrefab, _UIObjectsParent);
+            WalletRowView _walletRowView = Instantiate(_walletRowViewPrefab, _UIObjectsParent);
 
-            Sprite spriteToSet;
-            int incrementToSet;
-            int decrementToSet;
+            WalletRowControl _walletRowControl = _walletRowView.GetComponent<WalletRowControl>();
 
-            switch (currencyData.Key)
-            {
-                case CurrencyType.Meat:
-                    spriteToSet = _meatSprite;
-                    incrementToSet = _meatIncrement;
-                    decrementToSet = _meatDecrement;
-                    break;
-                case CurrencyType.Alcohol:
-                    spriteToSet = _alcoholSprite;
-                    incrementToSet = _alcoholIncrement;
-                    decrementToSet = _alcoholDecrement;
-                    break;
-                case CurrencyType.Money:
-                    spriteToSet = _moneySprite;
-                    incrementToSet = _moneyIncrement;
-                    decrementToSet = _moneyDecrement;
-                    break;
-                default:
-                    spriteToSet = _moneySprite;
-                    incrementToSet = _moneyIncrement;
-                    decrementToSet = _moneyDecrement;
-                    break;
-            }
+            CurrencyConfig currencyConfig = _currencyConfigsByType[currencyData.Key];
 
-            _UIrow.InitRow(spriteToSet, _walletStartingValue, _wallet, currencyData.Key, incrementToSet, decrementToSet);
+            _walletRowView.InitRow(
+                currencyConfig.sprite,
+                _walletStartingValue,
+                _wallet,
+                currencyData.Key);
+
+            _walletRowControl.InitRow(
+                currencyConfig.increment,
+                currencyConfig.decrement,
+                _wallet,
+                currencyData.Key);
         }
     }
 
