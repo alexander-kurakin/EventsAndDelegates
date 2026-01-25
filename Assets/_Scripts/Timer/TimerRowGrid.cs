@@ -1,24 +1,19 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TimerRowGrid : MonoBehaviour
+public class TimerRowGrid : TimerRowBase
 {
     [SerializeField] private Transform _timerGridParent;
     [SerializeField] private GridElement _timerGridElementPrefab;
 
-    private Timer _timer;
     private List<GridElement> _gridElements = new();
 
-    public void Init(Timer timer)
+    protected override void AfterInit(Timer timer)
     {
-        _timer = timer;
-        _timer.ElapsedTimeChanged += OnElapsedTimeChanged;
-
         SpawnGrid(_timer.TimerValue);
     }
 
-    private void OnElapsedTimeChanged(float elapsedTime)
+    protected override void OnElapsedTimeChanged(float elapsedTime)
     {
         UpdateGrid(elapsedTime);
     }
