@@ -30,8 +30,11 @@ public class EnemyDestroyer
             return;
         }
 
+        _copyOfMainEnemies.Clear();
+
         foreach (KeyValuePair<Enemy, List<Func<bool>>> kvp in _mainEnemyList)
-            _copyOfMainEnemies.Add(kvp.Key);
+            if (!_keysToDelete.Contains(kvp.Key))
+                _copyOfMainEnemies.Add(kvp.Key);
 
         _copyOfMainEnemies[UnityEngine.Random.Range(0, _copyOfMainEnemies.Count)].Kill();
     }
@@ -42,6 +45,9 @@ public class EnemyDestroyer
         {
             Enemy enemy = kvp.Key;
             List<Func<bool>> _rules = kvp.Value;
+
+            if (_keysToDelete.Contains(enemy))
+                continue;
 
             foreach (Func<bool> delegateRule in _rules)
                 if (delegateRule())

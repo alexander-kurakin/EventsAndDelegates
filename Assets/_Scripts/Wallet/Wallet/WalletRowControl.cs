@@ -3,7 +3,6 @@ using UnityEngine.UI;
 
 public class WalletRowControl : MonoBehaviour
 {
-
     [SerializeField] private Button _addButton;
     [SerializeField] private Button _removeButton;
 

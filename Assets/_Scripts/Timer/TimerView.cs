@@ -3,11 +3,10 @@ using UnityEngine;
 
 public class TimerView : MonoBehaviour
 {
-    private Timer _timer;
-    private TimerRow _timerRow;
-
-    [SerializeField] private TimerRow _timerRowPrefab;
+    [SerializeField] private TimerRowControl _timerRowPrefab;
     [SerializeField] private Transform _timerObjectsParent;
+
+    private Timer _timer;
 
     public void InitTimer(Timer timer)
     {
@@ -17,7 +16,13 @@ public class TimerView : MonoBehaviour
 
     private void SpawnUI()
     {
-        _timerRow = Instantiate(_timerRowPrefab, _timerObjectsParent);
-        _timerRow.InitRow(_timer);
+        TimerRowControl _timerRowControl = Instantiate(_timerRowPrefab, _timerObjectsParent);
+        _timerRowControl.Init(_timer);
+
+        if (_timerRowControl.TryGetComponent<TimerRowGrid>(out TimerRowGrid _timerRowGrid))
+            _timerRowGrid.Init(_timer);
+
+        if (_timerRowControl.TryGetComponent<TimerRowSlider>(out TimerRowSlider _timerRowSlider))
+            _timerRowSlider.Init(_timer);
     }
 }

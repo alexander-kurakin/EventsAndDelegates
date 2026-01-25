@@ -3,17 +3,16 @@ using UnityEngine;
 
 public class LogicRunner : MonoBehaviour
 {
-    private Wallet _wallet;
-    private Timer _timer;
-    private Dictionary<CurrencyType, int> _configuredCurrency;
+    [SerializeField] private WalletView _walletView;
+    [SerializeField] private TimerView _timerView;
 
     [SerializeField] private int _walletMaxValue = 9999;
     [SerializeField] private int _walletStartingValue = 0;
-
     [SerializeField] private float _defaultTimerValue = 10f;
-    
-    [SerializeField] private WalletView _walletView;
-    [SerializeField] private TimerView _timerView;
+ 
+    private Wallet _wallet;
+    private Timer _timer;
+    private Dictionary<CurrencyType, int> _configuredCurrency;
 
     private void Awake()
     {

@@ -33,22 +33,22 @@ public class WalletView : MonoBehaviour
         {
             WalletRowView _walletRowView = Instantiate(_walletRowViewPrefab, _UIObjectsParent);
 
-            WalletRowControl _walletRowControl = _walletRowView.GetComponent<WalletRowControl>();
+            if (_walletRowView.TryGetComponent<WalletRowControl>(out WalletRowControl _walletRowControl))
+            {
+                CurrencyConfig currencyConfig = _currencyConfigsByType[currencyData.Key];
 
-            CurrencyConfig currencyConfig = _currencyConfigsByType[currencyData.Key];
+                _walletRowView.InitRow(
+                    currencyConfig.sprite,
+                    _walletStartingValue,
+                    _wallet,
+                    currencyData.Key);
 
-            _walletRowView.InitRow(
-                currencyConfig.sprite,
-                _walletStartingValue,
-                _wallet,
-                currencyData.Key);
-
-            _walletRowControl.InitRow(
-                currencyConfig.increment,
-                currencyConfig.decrement,
-                _wallet,
-                currencyData.Key);
+                _walletRowControl.InitRow(
+                    currencyConfig.increment,
+                    currencyConfig.decrement,
+                    _wallet,
+                    currencyData.Key);
+            }
         }
     }
-
 }

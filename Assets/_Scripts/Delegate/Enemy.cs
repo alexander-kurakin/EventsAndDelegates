@@ -13,6 +13,9 @@ public class Enemy : MonoBehaviour
 
     public void Kill()
     {
+        if (IsDead)
+            return;
+
         IsDead = true;
     }    
 }
